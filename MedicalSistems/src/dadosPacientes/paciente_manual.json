@@ -1,0 +1,10 @@
+{
+  "nome": "João Silva",
+  "endereco": "Rua Exemplo, 123",
+  "cpf": "123.456.789-00",
+  "telefone": "(11) 98765-4321",
+  "email": "joao.silva@example.com",
+  "dataNascimento": "1990-05-15",
+  "profissao": "Engenheiro",
+  "planoDeSaude": "Plano X"
+}

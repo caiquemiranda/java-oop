@@ -1,3 +1,4 @@
+import cadastro.CadastroPacientes;
 import java.time.LocalDate;
 
 public class Main {
@@ -15,9 +16,9 @@ public class Main {
         paciente.setProfissao("Engenheiro");
         paciente.setPlanoDeSaude("Plano X");
 
-        // Salvando o objeto como JSON em um arquivo
-        paciente.salvarComoJson("paciente_manual.json");
+        // Salvando o objeto como JSON em um arquivo dentro da pasta src/dadosPacientes
+        paciente.salvarComoJson("src/dadosPacientes/paciente_manual.json");
 
-        System.out.println("Dados do paciente salvos em paciente_manual.json");
+        System.out.println("Dados do paciente salvos em src/dadosPacientes/paciente_manual.json");
     }
 }

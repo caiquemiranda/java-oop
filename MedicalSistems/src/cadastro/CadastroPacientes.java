@@ -1,6 +1,8 @@
+package cadastro;
+
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.time.LocalDate;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -15,10 +17,9 @@ public class CadastroPacientes {
     private String profissao;
     private String planoDeSaude;
 
-    // Construtor vazio
+
     public CadastroPacientes() {}
 
-    // Getters e Setters
     public String getNome() {
         return nome;
     }
@@ -83,7 +84,7 @@ public class CadastroPacientes {
         this.planoDeSaude = planoDeSaude;
     }
 
-    // Método para converter o objeto em uma String JSON manualmente
+    //  converter o objeto em uma String JSON manualmente
     public String toJson() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         StringBuilder json = new StringBuilder();
@@ -99,11 +100,15 @@ public class CadastroPacientes {
         json.append("}");
         return json.toString();
     }
-
-    // Método para salvar o JSON em um arquivo
     public void salvarComoJson(String caminhoArquivo) {
-        try (FileWriter writer = new FileWriter(caminhoArquivo)) {
-            writer.write(this.toJson());
+        try {
+            File file = new File(caminhoArquivo);
+            file.getParentFile().mkdirs();
+
+            try (FileWriter writer = new FileWriter(file)) {
+                writer.write(this.toJson());
+            }
+            System.out.println("Dados do paciente salvos em " + caminhoArquivo);
         } catch (IOException e) {
             e.printStackTrace();
         }
