@@ -1,8 +1,8 @@
-import java.time.LocalDate;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class CadastroPacientes {
 
@@ -16,8 +16,7 @@ public class CadastroPacientes {
     private String planoDeSaude;
 
     // Construtor vazio
-    public CadastroPacientes() {
-    }
+    public CadastroPacientes() {}
 
     // Getters e Setters
     public String getNome() {
@@ -84,11 +83,27 @@ public class CadastroPacientes {
         this.planoDeSaude = planoDeSaude;
     }
 
-    // Método para converter o objeto em JSON e salvar em arquivo
+    // Método para converter o objeto em uma String JSON manualmente
+    public String toJson() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        StringBuilder json = new StringBuilder();
+        json.append("{\n");
+        json.append("  \"nome\": \"").append(nome).append("\",\n");
+        json.append("  \"endereco\": \"").append(endereco).append("\",\n");
+        json.append("  \"cpf\": \"").append(cpf).append("\",\n");
+        json.append("  \"telefone\": \"").append(telefone).append("\",\n");
+        json.append("  \"email\": \"").append(email).append("\",\n");
+        json.append("  \"dataNascimento\": \"").append(dataNascimento != null ? dataNascimento.format(formatter) : null).append("\",\n");
+        json.append("  \"profissao\": \"").append(profissao).append("\",\n");
+        json.append("  \"planoDeSaude\": \"").append(planoDeSaude).append("\"\n");
+        json.append("}");
+        return json.toString();
+    }
+
+    // Método para salvar o JSON em um arquivo
     public void salvarComoJson(String caminhoArquivo) {
-        Gson gson = new GsonBuilder().setPrettyPrinting().create(); // Formata o JSON para facilitar a leitura
         try (FileWriter writer = new FileWriter(caminhoArquivo)) {
-            gson.toJson(this, writer); // Serializa o objeto e salva no arquivo
+            writer.write(this.toJson());
         } catch (IOException e) {
             e.printStackTrace();
         }
